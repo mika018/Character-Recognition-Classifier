@@ -58,3 +58,68 @@ Figure 4: Nearest Neighbour Classification boundaries | Figure 5: 3-Nearest Neig
 Figure 6: 5-Nearest Neighbour Classification boundaries | Figure 7: 5-Nearest Neighbour Classification with test data
 
 The graph is drawn by taking all the points on the meshgrid and determining their corresponding class. Each point is coloured according to its class. This creates a Voronoi diagram with 3 cells, one for each class. The training data points are denoted by circles, while the test data points are represented by stars. The average magnitude values computed initially from the training data have been normalized using the feature scaling method, bringing all of the values into the [0, 1] interval. Some of the test data falls out of this normalised interval, however, as can be seen in the graph.
+
+![s18](https://cloud.githubusercontent.com/assets/16266257/26522589/e8536398-42fb-11e7-8d64-9d9d00a730b9.png) | ![s11](https://cloud.githubusercontent.com/assets/16266257/26522590/e8638d86-42fb-11e7-88af-85d1f0b89a94.png) | ![s12](https://cloud.githubusercontent.com/assets/16266257/26522592/e86b5426-42fb-11e7-9f2b-abf402fecd76.png) | ![s13](https://cloud.githubusercontent.com/assets/16266257/26522593/e86c4390-42fb-11e7-83d3-919b2cc58bc1.png) | ![s14](https://cloud.githubusercontent.com/assets/16266257/26522595/e86da44c-42fb-11e7-97ac-217661ea0149.png) | ![s15](https://cloud.githubusercontent.com/assets/16266257/26522591/e86ad4ec-42fb-11e7-88bd-7920e4feb36f.png) | ![s16-marked](https://cloud.githubusercontent.com/assets/16266257/26522596/e86fd83e-42fb-11e7-8f2a-611ffd21cf79.png) | ![s17](https://cloud.githubusercontent.com/assets/16266257/26522597/e8810bfe-42fb-11e7-9439-29136106be29.png)
+:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|:--------:|
+![t18](https://cloud.githubusercontent.com/assets/16266257/26522608/1b93fa7e-42fc-11e7-9592-c027e50bdb35.png) | ![t11](https://cloud.githubusercontent.com/assets/16266257/26522603/1b8e6834-42fc-11e7-92b4-3950af688791.png) | ![t12](https://cloud.githubusercontent.com/assets/16266257/26522605/1b902fac-42fc-11e7-824a-f02001edde2c.png) | ![t13](https://cloud.githubusercontent.com/assets/16266257/26522604/1b8f4b5a-42fc-11e7-8f9e-f8fac6747564.png) | ![t14](https://cloud.githubusercontent.com/assets/16266257/26522607/1b93713a-42fc-11e7-9480-84bfe2f2c452.png) | ![t15-marked](https://cloud.githubusercontent.com/assets/16266257/26522606/1b92ca0a-42fc-11e7-9ce3-aff03cb959e8.png) | ![t16](https://cloud.githubusercontent.com/assets/16266257/26522609/1ba8a960-42fc-11e7-8d73-e176616c2e49.png) | ![t17-marked](https://cloud.githubusercontent.com/assets/16266257/26522602/1b745f5c-42fc-11e7-960f-5eced62df8e5.png) 
+![v18](https://cloud.githubusercontent.com/assets/16266257/26522616/3e3a9a74-42fc-11e7-9845-27dd12096bde.png) | ![v11](https://cloud.githubusercontent.com/assets/16266257/26522617/3e4dbece-42fc-11e7-8fdb-c254363f957d.png) | ![v12](https://cloud.githubusercontent.com/assets/16266257/26522618/3e5322b0-42fc-11e7-9492-d0e489247b9e.png) | ![v13-marked](https://cloud.githubusercontent.com/assets/16266257/26522622/3e567820-42fc-11e7-8144-46adc737daf6.png) | ![v14](https://cloud.githubusercontent.com/assets/16266257/26522620/3e55c100-42fc-11e7-82fb-1700569a4ee7.png) | ![v15](https://cloud.githubusercontent.com/assets/16266257/26522619/3e548dbc-42fc-11e7-9ef8-b4e387a18db5.png) | ![v16](https://cloud.githubusercontent.com/assets/16266257/26522621/3e560c00-42fc-11e7-964b-4cb1a5ac6375.png) | ![v17](https://cloud.githubusercontent.com/assets/16266257/26522623/3e668a76-42fc-11e7-8777-e257222c988c.png)
+<p align="center">
+Figure 8: Generated test data points
+</p>
+
+When designing our test data, we tried to create data points which would show the limits of our classifier. Some peculiar test data points which are analyzed below are marked in Figure 8. For instance, we have a included a small S, i.e. S16, which is rather sharp than curvy. Our classifier labels it correctly, but it places it in the middle of the graph, meaning it is not particularly confident about its decision. We can understand why by looking at the letter's magnitude spectrum included in Figure 9. This letter's magnitude spectrum is quite different from all of the average spectrums that we have computed. We can see the parts where V should be bright are also a bit brighter than the other regions. A similar example is letter V13. The most interesting ones are T15 and T17. The former is classified as a V, because it is tilted. Its magnitude spectrum overlays one of the cross filter's arms. The latter has a curvy top part, similar to how an S would look like, and therefore classifying it accordingly. If examined closely, the plus filter scores just bit higher than the cross filter. The magnitude spectrum in Figure 12 shows that, perhaps, the two arms of the plus filter cover the bright areas better than the arms of the cross filter. 
+
+While some outliers are present, most of our test data has been classified correctly.
+
+![s16_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522714/85ac35a0-42fe-11e7-8eb4-8214b3f1a107.png) | ![v13_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522717/85b4bff4-42fe-11e7-84fb-d693e3d6f494.png) | ![t15_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522715/85b43322-42fe-11e7-90d0-355fa1b144ad.png) | ![t17_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522716/85b46522-42fe-11e7-8fec-5f955c62b92f.png) 
+:--------:|:--------:|:--------:|:--------:|
+Figure 9: S16 magnitude spectrum | Figure 10: V13 magnitude spectrum | Figure 11: T15 magnitude spectrum | Figure 12: T17 magnitude spectrum
+
+## Classifying A and B
+An interesting exercise to do is to test the classifier which we have trained using the letters S, T and V on some other letters and see how well it performs, without tweaking or modifying anything. We have been given some test data for the letters A and B. The latter one is classified as an S. Its magnitude spectrum, shown in Figure 15, shows that the letter scores extremely high on the plus filter, its values being very close to 1. When taking away the horizontal, vertical, and oblique lines, we are left with a magnitude spectrum similar to the average magnitude spectrum of S. This makes sense because B contains lots of curves, just like the S.
+
+![a-and-b](https://cloud.githubusercontent.com/assets/16266257/26522761/9753cb3c-42ff-11e7-818c-e3a2ab935820.png)
+|:----:|
+Figure 13: Classification of A and B
+
+![a_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522760/97437f7a-42ff-11e7-9e69-0e6f93785de1.png) |  ![b_magnitude_spectrum](https://cloud.githubusercontent.com/assets/16266257/26522762/9755caea-42ff-11e7-9ab0-f0d6c66760dc.png)
+:--------:|:--------:|
+Figure 14: A magnitude spectrum | Figure 15: B magnitude spectrum
+
+## Decision Trees
+Decision trees [3] are common supervised classification data mining technique. The algorithm works by performing decisions at various levels of a tree, depending of which features have been chosen. It uses features which offer more information about the data first, i.e. features which classify the data better. The information gain can be determined by using an impurity measurement. The sklearn.tree.DecisionT reeClassif ier object has two impurity measurements, which are very similar: the Gini impurity and the Entropy. We decided to use the Gini impurity measurement, as it does not contain the computationally expensive logarithm and it is therefore slightly faster. The Gini impurity measures how often an element that was chosen randomly from the set of samples would be incorrectly labeled, provided that it was labeled randomly. The Gini impurity has the following formula, where c represents the number of classes:
+
+![2](https://cloud.githubusercontent.com/assets/16266257/26522848/6fcefe04-4301-11e7-8a40-b1e378b4a9c2.PNG)
+
+The decision tree is formed out of multiple nodes. The algorithm splits the data points in two sets at each step, until all the data points in a certain node are part of the same class or until there are no features left to use in order to make splits. Figure 16 shows that the algorithm does a fairly good job at determining the decision surfaces.
+
+![decision-tree](https://cloud.githubusercontent.com/assets/16266257/26522763/975696f0-42ff-11e7-998d-676a0a12592f.png) | ![decision-tree-graphviz](https://cloud.githubusercontent.com/assets/16266257/26522764/975b2c2e-42ff-11e7-8a2f-5e9ff6d0c2ca.png)
+:--------:|:--------:|
+Figure 16: Decision surface of a decision tree using paired features | Figure 17: Diagram of the decision tree
+
+Figure 17 exhibits a visual representation of the decision tree in a human understandable manner. The algorithm starts with all the samples in the root node. The first decision is based on the cross feature. The samples are split in such a way that the T training data points are to the left of the decision boundary (i.e. where the average brightness computed using the cross filter is smaller than 0.3416), while the other data points are to its right (i.e. where the values are greater than 0.3416). The left child, when the decision condition is T rue, contains only samples from the second class, so the algorithm has finished computing on this branch. For the right child, which contains all the sample points from class 1 and 3, the decision condition is based on the second feature (i.e. the plus feature in our case). At this point, the algorithm finishes computing because all of the leaves of the tree contain training data points from the same class.
+
+Intuitively, decision trees emulate the way humans would try to set the decision boundaries. T’s score low on the cross feature, while the other two letters score relatively high. On the other hand, V ’s score low on the plus feature.
+
+While decision trees do not tend to be as accurate as other approaches and tend to overfit the data if too many features are used, the technique has plenty of advantages. Being a white box model, it allows for a graphical representation of the tree, making it easy to look into why the algorithm took some decisions and gain more insight into the data. The Gini impurity allows for statistical tests to be applied in order to determine which features are more relevant in determining the best classification. A disadvantage is that the results it produces are not consistent - small variations in the training data can lead to a completely different tree. To mitigate the disadvantages, a small number of features is recommended to be chosen. In fact, the decision tree confirmed our assumption that the cross and the plus features are the best, by selecting those two features as the best ones when all five features are fed into the algorithm. The final decision tree was remarkably similar to the one which makes use of only two features.
+
+Comparing the Decision Trees classifier with the k-Nearest Neighbours classifier, we can see that the results are quite similar, even if the boundaries generated by the decision tree are less precise. The mathematics behind the decision tree classifier is more complicated, but it offers another way of visualizing the data. Decision Trees are not affected by the outliers, whereas when using kNN, all points could potentially have an equal ”weighting” in building the decision boundary. In practice, the naive kNN is faster than naive decision trees. Assuming the decision tree is balanced, we have the following time complexities[5]:
+* naive kNN: O(1) [training time] + O(NK) [query time] = O(NK)
+* naive decision tree: O(N2 ∗ K ∗ log(N)) [training time] + O(log(N)) [query time] = O(N2 ∗ K)
+
+## Conclusion
+This report explored how Fourier Space Analysis can be used in letter recognition. It first gave a brief explanation of what the Fourier Domain is and how to apply the Fourier Transform in order to move to the frequency domain. Then, we discussed how to select and extract features from the Fourier Space to get the best possible classification. Afterwards, we examined two supervised classification algorithms and tested them on test data we generated.
+
+### References
+
+[1] Christopher M. Bishop. Pattern Recognition and Machine Learning. Springer, 2006.
+
+[2] Sanjeev R. Kulkarni. Lecture Notes for ELE201 Introduction to Electrical Signals and Systems. 2002.
+
+[3] skikit-learn Decision Trees. May 2017. url: http://scikit-learn.org/stable/modules/tree.html.
+
+[4] skikit-learn Nearest Neighbours. May 2017. url: http://scikit-learn.org/stable/modules/neighbors.html.
+
+[5] Why is KNN much faster than decision tree? May 2017. url: http://stackoverflow.com/questions/15428282/
+why-is-knn-much-faster-than-decision-tree.
+
