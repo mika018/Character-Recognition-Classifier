@@ -116,10 +116,9 @@ This report explored how Fourier Space Analysis can be used in letter recognitio
 
 [2] Sanjeev R. Kulkarni. Lecture Notes for ELE201 Introduction to Electrical Signals and Systems. 2002.
 
-[3] skikit-learn Decision Trees. May 2017. url: http://scikit-learn.org/stable/modules/tree.html.
+[3] skikit-learn Decision Trees. May 2017. url: http://scikit-learn.org/stable/modules/tree.html
 
-[4] skikit-learn Nearest Neighbours. May 2017. url: http://scikit-learn.org/stable/modules/neighbors.html.
+[4] skikit-learn Nearest Neighbours. May 2017. url: http://scikit-learn.org/stable/modules/neighbors.html
 
-[5] Why is KNN much faster than decision tree? May 2017. url: http://stackoverflow.com/questions/15428282/
-why-is-knn-much-faster-than-decision-tree.
+[5] Why is KNN much faster than decision tree? May 2017. url: http://stackoverflow.com/questions/15428282/why-is-knn-much-faster-than-decision-tree
 
